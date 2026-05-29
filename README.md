@@ -43,4 +43,4 @@ python -m unittest discover -s tests
 
 ## GitHub
 
-Ссылка на GitHub-репозиторий добавляется после публикации локального проекта.
+Репозиторий проекта: https://github.com/LevinAE/QC_EEG_PJCT
