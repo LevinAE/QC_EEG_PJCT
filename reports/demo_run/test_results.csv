@@ -1,0 +1,4 @@
+﻿check;source_data;expected;actual;status
+Clean record keeps PASS status;demo_clean_rest;PASS;PASS;PASS
+Noisy Fz record is flagged;demo_noisy_fz;Fz in bad_channels;Fz;PASS
+Flat Pz record is flagged;demo_flat_pz;Pz in bad_channels;Pz;PASS

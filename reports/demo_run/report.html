@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <title>EEG QC prototype report</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 32px; color: #1f2933; }
+    h1, h2 { color: #17324d; }
+    table { border-collapse: collapse; width: 100%; margin: 14px 0 28px; }
+    th, td { border: 1px solid #cbd2d9; padding: 8px 10px; text-align: left; }
+    th { background: #eef2f7; }
+    .source { font-size: 14px; color: #52606d; margin-top: -8px; }
+    img { max-width: 100%; border: 1px solid #d9e2ec; margin: 10px 0 26px; }
+  </style>
+</head>
+<body>
+  <h1>Quality Check EEG: демонстрационный отчёт прототипа</h1>
+  <p>Отчёт сформирован минимальным прототипом QC для проверки структуры результатов, расчёта метрик сигнала и подготовки материалов для практики.</p>
+
+  <h2>Таблица 1. Сводные QC-метрики по записям</h2>
+  <p class="source">Источник данных: синтетические EEG-подобные записи, сгенерированные модулем qc_eeg.metrics.</p>
+  <table><thead><tr><th>record_id</th><th>scenario</th><th>duration_sec</th><th>sfreq_hz</th><th>n_channels</th><th>n_bad_channels</th><th>bad_channels</th><th>mean_amplitude_uv</th><th>alpha_beta_ratio</th><th>qc_status</th></tr></thead><tbody><tr><td>demo_clean_rest</td><td>Rest</td><td>12</td><td>250</td><td>5</td><td>0</td><td></td><td>12.68</td><td>17.26</td><td>PASS</td></tr><tr><td>demo_noisy_fz</td><td>Rest</td><td>12</td><td>250</td><td>5</td><td>1</td><td>Fz</td><td>25.3</td><td>1.009</td><td>REVIEW</td></tr><tr><td>demo_flat_pz</td><td>Rest</td><td>12</td><td>250</td><td>5</td><td>1</td><td>Pz</td><td>10.1</td><td>17.67</td><td>REVIEW</td></tr></tbody></table>
+
+  <h2>Таблица 2. Результаты тестирования прототипа</h2>
+  <p class="source">Источник данных: демонстрационный запуск CLI на clean/noisy/flat сценариях.</p>
+  <table><thead><tr><th>check</th><th>source_data</th><th>expected</th><th>actual</th><th>status</th></tr></thead><tbody><tr><td>Clean record keeps PASS status</td><td>demo_clean_rest</td><td>PASS</td><td>PASS</td><td>PASS</td></tr><tr><td>Noisy Fz record is flagged</td><td>demo_noisy_fz</td><td>Fz in bad_channels</td><td>Fz</td><td>PASS</td></tr><tr><td>Flat Pz record is flagged</td><td>demo_flat_pz</td><td>Pz in bad_channels</td><td>Pz</td><td>PASS</td></tr></tbody></table>
+
+  <h2>Рисунок 1. Спектральная мощность по частотным диапазонам</h2>
+  <p class="source">Оси: X - диапазон частот, Y - мощность. Легенда показывает записи.</p>
+  <img src="band_power.svg" alt="Band power chart">
+
+  <h2>Рисунок 2. Количество проблемных каналов</h2>
+  <p class="source">Оси: X - запись, Y - число каналов. Цвет отражает итоговый QC-статус.</p>
+  <img src="bad_channels.svg" alt="Bad channels chart">
+</body>
+</html>
